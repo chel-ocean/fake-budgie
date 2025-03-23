@@ -1,21 +1,43 @@
 import './App.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard, { dashboardLoader } from './pages/Dashboard';
+import Error from './pages/Error';
+import Main, { mainLoader } from './layouts/Main';
+
+// actions
+import { logoutAction } from './actions/logout';
 
 function App() {
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Dashboard />,
-      loader: dashboardLoader,
+      element: <Main />,
+      loader: mainLoader,
+      children: [
+        {
+          path: "/",
+          element: <Dashboard />,
+          loader: dashboardLoader,
+        },
+        {
+          path: "logout",
+          action: logoutAction,
+        },
+        {
+          path: "*",
+          element: <Error />,
+        },
+      ]
     },
     {
       path: "about",
       element: <h1>About</h1>,
+    },
+    
+    {
+      path: "*",
+      element: <Error />,
     },
   ]);
 
