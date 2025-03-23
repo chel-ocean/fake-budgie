@@ -38,6 +38,10 @@ const Register = () => {
                         autoComplete="chosen-password" 
                         className="border-black border-2"
                     />
+                    <input 
+                        type="hidden"
+                        name="_action"
+                        value="newUser"></input>
                     <button type="submit" className="btn btn--dark bg-blue-700 mt-2">
                         <span>Sign Up</span>    
                     </button>
