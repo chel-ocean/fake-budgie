@@ -1,8 +1,6 @@
 // rrd imports
 import { Form, NavLink } from "react-router-dom"
 
-import homeButton from "../assets/homeButton.png"
-
 import {TrashIcon, HomeIcon} from '@heroicons/react/20/solid'
 
 const Nav = ({userName}) => {
