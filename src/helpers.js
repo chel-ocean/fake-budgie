@@ -43,3 +43,38 @@ export const createTransaction = ({budgetId, name, amount}) => {
     const existingTransactions = fetchData("transactions") ?? [];
     return localStorage.setItem("transactions", JSON.stringify([...existingTransactions, newTransaction]));
 }
+
+// total spent by budget
+export const calculateSpentByBudget = (budgetId) => {
+    const transactions = fetchData("transactions") ?? [];
+    const budgetSpent = transactions.reduce((accum, transaction) => {
+        if (transaction.budgetId === budgetId) {
+            return accum + transaction.amount;
+        }
+        else return accum;
+    }, 0)
+    return budgetSpent;
+}
+
+// formatting:
+
+// format currency:
+export const formatCurrency = (amount) => {
+    return amount.toLocaleString(undefined, {
+        style: "currency",
+        currency: "USD",
+    });
+}
+
+// format percentages:
+export const formatPercentage = (amount) => {
+    return amount.toLocaleString(undefined, {
+        style: "percent",
+        minimumFractionDigits: 0
+    })
+}
+
+// format date:
+export const formatDate = (date) => {
+    return new Date(date).toLocaleDateString();
+}

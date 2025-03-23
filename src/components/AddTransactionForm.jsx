@@ -14,7 +14,7 @@ const AddTransactionForm = ({budgets}) => {
         }
     })
     return (
-        <div className="form-wrapper">
+        <div className="form-wrapper border border-gray-200 p-4">
             <h2>Add New{" "}
                 <span>
                     {budgets.length === 1 && `${budgets.map((budget) => budget.name)}`}
@@ -23,7 +23,7 @@ const AddTransactionForm = ({budgets}) => {
             </h2>
             <fetcher.Form
                 method="post"
-                className="grid-sm border border-gray-200 p-4"
+                className="grid-sm "
                 ref={formRef}
             >
                 <div className="transaction-inputs">

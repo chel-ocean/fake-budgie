@@ -9,12 +9,15 @@ import { createBudget, fetchData, wait, createTransaction } from "../helpers";
 import Register from "../components/Register";
 import AddBudgetForm from "../components/AddBudgetForm";
 import AddTransactionForm from "../components/AddTransactionForm";
+import BudgetProfile from "../components/BudgetProfile";
+import Table from "../components/Table";
 
 // loader
 export function dashboardLoader() {
     const userName = fetchData("userName");
     const budgets = fetchData("budgets"); 
-    return {userName, budgets}
+    const transactions = fetchData("transactions");
+    return {userName, budgets, transactions}
 }
 
 // action
@@ -55,9 +58,8 @@ export async function dashboardAction({request}) {
                 budgetId: values.newTransactionBudget,
                 name: values.newTransactionName,
                 amount: values.newTransactionAmount,
-                
             })
-            return toast.success(`Trasaction ${values.newTransactionName} created!`);
+            return toast.success(`Transaction ${values.newTransactionName} created!`);
         } catch (e) {
             throw new Error("There was a problem with your transaction creation. Please try again.");
         }
@@ -65,7 +67,7 @@ export async function dashboardAction({request}) {
 }
 
 const Dashboard = () => {
-    const {userName, budgets} = useLoaderData();
+    const {userName, budgets, transactions} = useLoaderData();
     return (
         <>
             {userName ? (
@@ -79,6 +81,18 @@ const Dashboard = () => {
                                         <AddBudgetForm />
                                         <AddTransactionForm budgets={budgets}/>
                                     </div>
+                                    <h2>Existing Budgets</h2>
+                                    <div>
+                                        {
+                                            budgets.map((budget) => (<BudgetProfile key={budget.id} budget={budget} />))
+                                        }
+                                    </div>
+                                    {transactions && transactions.length > 0 && (
+                                        <div className="grid-md">
+                                            <h2>Recent Transactions</h2>
+                                            <Table transactions={transactions.sort((a, b) => b.createdAt - a.createdAt)}/>
+                                        </div>
+                                        )}
                                 </div>
                             ) : (
                                 <div className="grid-sm">

@@ -1,6 +1,9 @@
-import { Form } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
+import { PlusCircleIcon } from "@heroicons/react/20/solid";
 
 const Register = () => {
+    const fetcher = useFetcher();
+    const isSubmitting = fetcher.state === "submitting";
     return (
         <div>
             <div>
@@ -10,7 +13,7 @@ const Register = () => {
                 <p>
                     Personal budgeting is the secret to financial success. Sign up today!
                 </p>
-                <Form method="post" className="flex flex-col w-50 border-black border-2 p-2">
+                <fetcher.Form method="post" className="flex flex-col w-50 border-black border-2 p-2">
                     <label>Enter Name</label>
                     <input 
                         type="text" 
@@ -42,10 +45,21 @@ const Register = () => {
                         type="hidden"
                         name="_action"
                         value="newUser"></input>
-                    <button type="submit" className="btn btn--dark bg-blue-700 mt-2">
-                        <span>Sign Up</span>    
+                    <button 
+                        type="submit" 
+                        className="btn btn--dark flex"
+                        disabled={isSubmitting}
+                    >
+                    { isSubmitting ? 
+                        <span>Creating User...</span> 
+                    : (
+                        <>
+                            <span>Create New User</span>
+                            <PlusCircleIcon width={20} />
+                        </>
+                    )}
                     </button>
-                </Form>
+                </fetcher.Form>
             </div>
         </div>
     )
