@@ -3,11 +3,12 @@ import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // helper functions
-import { createBudget, fetchData } from "../helpers";
+import { createBudget, fetchData, wait, createTransaction } from "../helpers";
 
 // components
 import Register from "../components/Register";
 import AddBudgetForm from "../components/AddBudgetForm";
+import AddTransactionForm from "../components/AddTransactionForm";
 
 // loader
 export function dashboardLoader() {
@@ -18,6 +19,7 @@ export function dashboardLoader() {
 
 // action
 export async function dashboardAction({request}) {
+    await wait();
     const data = await request.formData();
     const {_action, ...values} = Object.fromEntries(data);
     console.log(_action);
@@ -45,6 +47,21 @@ export async function dashboardAction({request}) {
             throw new Error("There was a problem with your budget creation. Please try again.");
         }
     }
+
+    if (_action === "createTransaction") {
+        try {
+            // create transaction
+            createTransaction({
+                budgetId: values.newTransactionBudget,
+                name: values.newTransactionName,
+                amount: values.newTransactionAmount,
+                
+            })
+            return toast.success(`Trasaction ${values.newTransactionName} created!`);
+        } catch (e) {
+            throw new Error("There was a problem with your transaction creation. Please try again.");
+        }
+    }
 }
 
 const Dashboard = () => {
@@ -55,16 +72,25 @@ const Dashboard = () => {
                 <div className="dashboard">
                     <h1>Welcome back, <span className="">{userName}</span></h1>
                     <div className="grid-sm">
-                        {/* {budgets ? () : ()} */}
-                        <div className="grid-lg">
-                            <div className="flex-lg">
-                                <AddBudgetForm />
-                            </div>
-                        </div>
+                        {
+                            budgets && budgets.length > 0 ? (
+                                <div className="grid-lg">
+                                    <div className="flex-lg">
+                                        <AddBudgetForm />
+                                        <AddTransactionForm budgets={budgets}/>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="grid-sm">
+                                    <p>Create a budget to get started!</p>
+                                    <AddBudgetForm />
+                                </div>
+                            )
+                            
+                        }
                     </div>
                 </div>
             ) 
-            
             : <Register />}
         </>
     )
