@@ -5,6 +5,7 @@ import Error from './pages/Error';
 import Main, { mainLoader } from './layouts/Main';
 import TransactionsPage, {transactionsAction, transactionsLoader} from './pages/TransactionsPage';
 import BudgetPage, { budgetAction, budgetLoader } from './pages/BudgetPage';
+import { deleteBudget } from './actions/deleteBudget';
 
 // library imports
 import { ToastContainer } from 'react-toastify';
@@ -40,7 +41,13 @@ function App() {
           element: <BudgetPage />,
           loader: budgetLoader,
           errorElement: <Error />,
-          action:budgetAction
+          action:budgetAction,
+          children: [
+            {
+              path: "delete",
+              action: deleteBudget
+            }
+          ]
         },
         {
           path: "logout",

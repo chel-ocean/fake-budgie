@@ -63,7 +63,7 @@ const BudgetPage = () => {
         <div className="grid-lg" style={{"--accent": budget.colour}}>
             <h1><span>{budget.name}</span> Overview</h1>
             <div className="flex-lg">
-                <BudgetProfile budget={budget} />
+                <BudgetProfile budget={budget} showDelete={true} />
                 <AddTransactionForm budgets={[budget]} />
             </div>
             {
