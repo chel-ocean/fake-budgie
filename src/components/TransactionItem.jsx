@@ -19,7 +19,7 @@ const TransactionItem = ({transaction, showBudget = true}) => {
             <td>
                 <Link 
                     to={`/budget/${budget.id}`}
-                    style={{"--accent": budget.colour}}
+                    style={{"--accent": budget.color}}
                 >{budget.name}</Link> 
             </td>
         )}
@@ -31,6 +31,7 @@ const TransactionItem = ({transaction, showBudget = true}) => {
                     <input type="hidden" name="transactionId" value={transaction.id}></input>
                     <button
                         type="submit"
+                        className="btn btn--warning"
                         aria-label={`Delete ${transaction.name} expense`}>
                             <TrashIcon width={20} />
                     </button>

@@ -83,17 +83,16 @@ const Dashboard = () => {
         <>
             {userName ? (
                 <div className="dashboard">
-                    <h1>Welcome back, <span className="">{userName}</span></h1>
+                    <h1>Welcome back, <span className="accent">{userName}</span></h1>
                     <div className="grid-sm">
-                        {
-                            budgets && budgets.length > 0 ? (
+                        {budgets && budgets.length > 0 ? (
                                 <div className="grid-lg">
                                     <div className="flex-lg">
                                         <AddBudgetForm />
                                         <AddTransactionForm budgets={budgets}/>
                                     </div>
                                     <h2>Existing Budgets</h2>
-                                    <div>
+                                    <div className="budgets">
                                         {
                                             budgets.map((budget) => (<BudgetProfile key={budget.id} budget={budget} />))
                                         }
@@ -120,8 +119,7 @@ const Dashboard = () => {
                         }
                     </div>
                 </div>
-            ) 
-            : <Register />}
+            ) : <Register />}
         </>
     )
 }

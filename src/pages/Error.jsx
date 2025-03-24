@@ -8,7 +8,7 @@ const Error = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="text-red-500">
+        <div className="error">
             <h1>Uh oh! we have a problem</h1>
             <p>error</p>
             <div className="flex-md">

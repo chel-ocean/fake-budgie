@@ -3,17 +3,13 @@ import {calculateSpentByBudget, formatCurrency, formatPercentage} from "../helpe
 import { BanknotesIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 const BudgetProfile = ({budget, showDelete = false}) => {
-    const {id, name, amount, colour} = budget;
+    const {id, name, amount, color} = budget;
     const spent = calculateSpentByBudget(id);
     const remaining = amount - spent;
     const percentage = spent / amount;
     return (
-        <div
-            className="border border-gray-200 p-4"
-            style={{
-                "--accent": colour
-            }}>
-            <div>
+        <div className="budget" style={{"--accent": color}}>
+            <div className="progress-text">
                 <h3>{name}</h3>
                 <p>{formatCurrency(amount)} Budgeted</p>
             </div>
@@ -36,7 +32,7 @@ const BudgetProfile = ({budget, showDelete = false}) => {
                                 }
                             }}
                         >
-                            <button type="submit" className="bth">
+                            <button type="submit" className="btn">
                                 <span>Delete Budget</span>
                                 <TrashIcon width={20} />
                             </button>
@@ -45,7 +41,7 @@ const BudgetProfile = ({budget, showDelete = false}) => {
                    
                 ) : (
                     <div className="flex-sm">
-                        <Link to={`/budget/${id}`} className="border border-gray-200 p-2 w-40 flex"> 
+                        <Link to={`/budget/${id}`} className="btn"> 
                             <span>View Details</span>
                             <BanknotesIcon width={20} />
                         </Link>

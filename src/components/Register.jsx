@@ -5,23 +5,24 @@ const Register = () => {
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === "submitting";
     return (
-        <div>
+        <div className="intro">
             <div>
                 <h1>
-                    Take Control of <span className="text-blue-500">Your Money</span>
+                    Take Control of <span className="accent">Your Money</span>
                 </h1>
                 <p>
                     Personal budgeting is the secret to financial success. Sign up today!
                 </p>
-                <fetcher.Form method="post" className="flex flex-col w-50 border-black border-2 p-2">
+                <fetcher.Form method="post">
                     <label>Enter Name</label>
                     <input 
                         type="text" 
                         name="userName" 
                         placeholder="Enter name" 
                         aria-label="Your Name" 
-                        autoComplete="given-name" required
-                        className="border-black border-2"
+                        autoComplete="given-name" 
+                        className="btn btn--dark"
+                        required
                     />
                     <label>Enter Email</label>
                     <input 
@@ -30,7 +31,8 @@ const Register = () => {
                         placeholder="Enter email" 
                         aria-label="Your Email" 
                         autoComplete="email" 
-                        className="border-black border-2"
+                        className="btn btn--dark"
+                        required
                     />
                     <label>Enter Password</label>
                     <input 
@@ -39,7 +41,8 @@ const Register = () => {
                         placeholder="Enter password" 
                         aria-label="Your Password" 
                         autoComplete="chosen-password" 
-                        className="border-black border-2"
+                        className="btn btn--dark"
+                        required
                     />
                     <input 
                         type="hidden"
@@ -47,7 +50,7 @@ const Register = () => {
                         value="newUser"></input>
                     <button 
                         type="submit" 
-                        className="btn btn--dark flex"
+                        className="btn btn--dark"
                         disabled={isSubmitting}
                     >
                     { isSubmitting ? 
