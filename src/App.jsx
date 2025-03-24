@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard, { dashboardAction, dashboardLoader } from './pages/Dashboard';
 import Error from './pages/Error';
 import Main, { mainLoader } from './layouts/Main';
+import TransactionsPage, {transactionsAction, transactionsLoader} from './pages/TransactionsPage';
+import BudgetPage, { budgetAction, budgetLoader } from './pages/BudgetPage';
 
 // library imports
 import { ToastContainer } from 'react-toastify';
@@ -24,6 +26,21 @@ function App() {
           element: <Dashboard />,
           action: dashboardAction,
           loader: dashboardLoader,
+          errorElement: <Error />,
+        },
+        {
+          path: "transactions",
+          element: <TransactionsPage />,
+          action: transactionsAction,
+          loader: transactionsLoader,
+          errorElement: <Error />,
+        },
+        {
+          path: "budget/:id",
+          element: <BudgetPage />,
+          loader: budgetLoader,
+          errorElement: <Error />,
+          action:budgetAction
         },
         {
           path: "logout",

@@ -1,19 +1,19 @@
 import React from 'react'
 import TransactionItem from './TransactionItem'
 
-const Table = ({transactions}) => {
+const Table = ({transactions, showBudget = true}) => {
   return (
     <div>
         <table className="table-auto w-full text-left">
             <thead>
                 <tr>
-                    {["Name", "Amount", "Date"].map((i, index) => (<th key={index}>{i}</th>))}
+                    {["Name", "Amount", "Date", showBudget? "Budget Profile" : "", ""].map((i, index) => (<th key={index}>{i}</th>))}
                 </tr>
             </thead>
             <tbody>
                 {transactions.map((transaction) => (
                     <tr key={transaction.id}>
-                        <TransactionItem transaction={transaction}/>
+                        <TransactionItem transaction={transaction} showBudget={showBudget}/>
                     </tr>
                 ))}
             </tbody>

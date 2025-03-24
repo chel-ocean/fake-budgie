@@ -17,11 +17,9 @@ const Main = () => {
     return (
         <div>
             <Nav userName={userName}/>
-            <h1>Main</h1>
             <main>
                 <Outlet />
             </main>
-            Main
         </div>
     )
 }

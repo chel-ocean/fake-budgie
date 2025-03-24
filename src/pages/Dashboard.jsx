@@ -1,9 +1,9 @@
 // rrd imports
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // helper functions
-import { createBudget, fetchData, wait, createTransaction } from "../helpers";
+import { createBudget, fetchData, wait, createTransaction, deleteItem } from "../helpers";
 
 // components
 import Register from "../components/Register";
@@ -25,7 +25,6 @@ export async function dashboardAction({request}) {
     await wait();
     const data = await request.formData();
     const {_action, ...values} = Object.fromEntries(data);
-    console.log(_action);
     
     // new user submission
     if (_action === "newUser") {
@@ -64,6 +63,18 @@ export async function dashboardAction({request}) {
             throw new Error("There was a problem with your transaction creation. Please try again.");
         }
     }
+
+    if (_action === "deleteTransaction") {
+        try {
+            deleteItem({
+                key: "transactions",
+                id: values.transactionId // from form with hidden input
+            })
+            return toast.success("Transaction deleted!");
+        } catch (e) {
+            throw new Error("There was a problem with your transaction deletion. Please try again.");
+        }
+    }
 }
 
 const Dashboard = () => {
@@ -90,7 +101,12 @@ const Dashboard = () => {
                                     {transactions && transactions.length > 0 && (
                                         <div className="grid-md">
                                             <h2>Recent Transactions</h2>
-                                            <Table transactions={transactions.sort((a, b) => b.createdAt - a.createdAt)}/>
+                                            <Table transactions={transactions.sort((a, b) => b.createdAt - a.createdAt)
+                                                .slice(0,5)
+                                            }/>
+                                            {transactions.length > 5 && (
+                                                <Link to="transactions" className="btn btn--dark">View All Transactions</Link>
+                                            )}
                                         </div>
                                         )}
                                 </div>
