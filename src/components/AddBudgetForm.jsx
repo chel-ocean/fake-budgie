@@ -19,10 +19,10 @@ const AddBudgetForm = () => {
     
     return (
         <div className="form-wrapper border border-gray-200 p-4">
-            <h2>Create Budget</h2>
+            <h2>Create Budget Profile</h2>
             <fetcher.Form method="post" className="grid-sm" ref={formRef}>
                 <div className="grid-xs">
-                    <label htmlFor="newBudget">Budget Name</label>
+                    <label htmlFor="newBudget">Budget Profile Name</label>
                     <input 
                         type="text" 
                         name="newBudgetName"

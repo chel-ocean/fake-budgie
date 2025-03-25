@@ -14,9 +14,9 @@ const AddTransactionForm = ({budgets}) => {
         }
     })
     return (
-        <div className="form-wrapper border border-gray-200 p-4">
+        <div className="form-wrapper ">
             <h2>Add New{" "}
-                <span>
+                <span className="accent">
                     {budgets.length === 1 && `${budgets.map((budget) => budget.name)}`}
                 </span>{" "} 
                     Expense
@@ -50,7 +50,7 @@ const AddTransactionForm = ({budgets}) => {
                     </div>
                 </div>
                 <div className="grid-sm" hidden={budgets.length === 1}>
-                    <label htmlFor="newTransactionBudget">Budget Category</label>
+                    <label htmlFor="newTransactionBudget">Select Budget Profile</label>
                     <select name="newTransactionBudget" id="newTransactionBudget" required>
                         {budgets.sort((a, b) => a.createdAt - b.createdAt).map((budget) => {
                             return (
