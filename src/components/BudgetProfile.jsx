@@ -13,12 +13,25 @@ const BudgetProfile = ({budget, showDelete = false}) => {
                 <h3>{name}</h3>
                 <p>{formatCurrency(amount)} Budgeted</p>
             </div>
-            <progress max={amount} value={spent} className="w-100">
+            
+            <progress max={amount} value={spent} className="">
                 {formatPercentage(percentage)} 
             </progress>
-            <div className="progress-text">
-                <small>{formatCurrency(spent)} spent</small>
-                <small>{formatCurrency(remaining)} remaining</small>
+            
+            <div>
+                {remaining < 0 ? (
+                    <div className="progress-text text-red-400">
+                        <small>{formatCurrency(spent)} spent</small>
+                        <small>{formatCurrency(-remaining)} over budget</small>
+                        
+                    </div>
+                ) : (
+                    <div className="progress-text">
+                        <small>{formatCurrency(spent)} spent</small>
+                        <small> {formatCurrency(remaining)} remaining</small>
+                    
+                    </div>
+                )}
             </div>
             {
                 showDelete ? (
