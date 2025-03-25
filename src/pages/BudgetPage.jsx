@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom"
-import { createTransaction, deleteItem, getAllMatchingItems } from "../helpers"
+import { createTransaction, deleteItem, getAllMatchingItems, fetchData } from "../helpers"
 import BudgetProfile from "../components/BudgetProfile"
 import AddTransactionForm from "../components/AddTransactionForm"
 import Table from "../components/Table"
@@ -28,32 +28,50 @@ export async function budgetAction({request}) {
     const data = await request.formData()
     const {_action, ...values} = Object.fromEntries(data);
 
-    if (_action === "deleteTransaction") {
+    try {
         // delete transaction
-        try {
+        if (_action === "deleteTransaction") {
             deleteItem({
                 key: "transactions",
                 id: values.transactionId
-            })
-            return toast.success("Transaction deleted!")
-        } catch (e) {
-            throw new Error("There was a problem deleting the transaction.")
+            });
+            toast.success("Transaction deleted!");
+            return null;  // important: Return null instead of toast since it was breaking after edit and updated the transaction
         }
+        
+        if (_action === "createTransaction") {
+            // create transaction
+            createTransaction({
+                budgetId: values.newTransactionBudget,
+                name: values.newTransactionName,
+                amount: values.newTransactionAmount,
+            });
+            toast.success(`Transaction ${values.newTransactionName} created!`);
+            return null;
+        }
+
+        if (_action === "editTransaction") {
+            const transactions = fetchData("transactions") || [];
+            const updatedTransactions = transactions.map(transaction => 
+                transaction.id === values.transactionId
+                    ? { 
+                        ...transaction, 
+                        name: values.newName,
+                        amount: Number(values.newAmount),
+                      }
+                    : transaction
+            );
+            localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
+            toast.success("Transaction updated!");
+            return null;
+        }
+    } catch (e) {
+        toast.error(e.message);
+        throw new Response("", { 
+            status: 400,
+            statusText: e.message 
+        });
     }
-    
-    if (_action === "createTransaction") {
-            try {
-                // create transaction
-                createTransaction({
-                    budgetId: values.newTransactionBudget,
-                    name: values.newTransactionName,
-                    amount: values.newTransactionAmount,
-                })
-                return toast.success(`Transaction ${values.newTransactionName} created!`);
-            } catch (e) {
-                throw new Error("There was a problem with your transaction creation. Please try again.");
-            }
-        }
 }
 
 const BudgetPage = () => {
@@ -71,7 +89,8 @@ const BudgetPage = () => {
                         <h2><span className="accent">{budget.name} </span>Transactions</h2>
                         <Table transactions={transactions} showBudget={false}/>
                     </div>
-            )}
+                )
+            }
         </div>
     )
 }

@@ -602,3 +602,12 @@ table a {
 .Toastify__toast-body {
   font-size: var(--fs-300);
 }
+
+.edit-input {
+  padding: 0.25rem;
+  border: 1px solid hsl(var(--muted));
+  border-radius: var(--round-sm);
+  width: 100%;
+  background: hsl(var(--bkg));
+  color: hsl(var(--text));
+}
