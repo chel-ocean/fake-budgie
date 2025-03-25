@@ -69,6 +69,24 @@ export const deleteItem = ({key, id}) => {
 
 // duplicate budget
 
+// duplicate transaction
+export const duplicateTransaction = (transactionId) => {
+    const transactions = fetchData("transactions") || [];
+    const original = transactions.find(t => t.id === transactionId);
+    
+    if (!original) throw new Error("Transaction not found");
+  
+    const newTransaction = {
+      ...original,
+      id: crypto.randomUUID(),
+      name: `${original.name} (Copy)`,
+    };
+  
+    localStorage.setItem("transactions",
+      JSON.stringify([...transactions, newTransaction])
+    );
+  };
+
 
 // formatting:
 
@@ -92,3 +110,4 @@ export const formatPercentage = (amount) => {
 export const formatDate = (date) => {
     return new Date(date).toLocaleDateString();
 }
+

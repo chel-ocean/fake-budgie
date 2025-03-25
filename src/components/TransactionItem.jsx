@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TrashIcon, PencilIcon, CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { TrashIcon, PencilIcon, CheckIcon, XMarkIcon, DocumentDuplicateIcon } from "@heroicons/react/20/solid";
 import { formatCurrency, formatDate, getAllMatchingItems } from "../helpers";
 import { Link, useFetcher } from "react-router-dom";
 
@@ -60,55 +60,56 @@ const TransactionItem = ({transaction, showBudget = true}) => {
             {isEditing ? (
                 <>
                 <fetcher.Form 
-                    method="post"
-                    onSubmit={(e) => {
-                    if (!editedName || !editedAmount) {
-                        e.preventDefault();
-                        return;
-                    }
-                    }}
-                >
+                    method="post">
                     <input type="hidden" name="_action" value="editTransaction" />
                     <input type="hidden" name="transactionId" value={transaction.id} />
                     <input type="hidden" name="newName" value={editedName} />
                     <input type="hidden" name="newAmount" value={editedAmount} />
                     <button
                         type="submit"
-                        className="btn btn--dark"
-                        aria-label="Save changes"
+                        className="--dark"
                         disabled={fetcher.state === "submitting"}
                     >
                     <CheckIcon width={20} />
                     </button>
                 </fetcher.Form>
                 <button
-                    className="btn btn--warning"
+                    className="--warning"
                     onClick={() => {
                         setIsEditing(false);
                         setEditedName(transaction.name);
                         setEditedAmount(transaction.amount);
                     }}
-                    aria-label="Cancel editing"
                 >
                     <XMarkIcon width={20} />
                 </button>
                 </>
             ) : (
+                <>
                 <button
                     onClick={() => setIsEditing(true)}
-                    className="btn btn--dark"
-                    aria-label="Edit transaction"
+                    className="--dark"
                 >
                 <PencilIcon width={20} />
                 </button>
+                <fetcher.Form method="post">
+                    <input type="hidden" name="_action" value="duplicateTransaction" /> 
+                    <input type="hidden" name="transactionId" value={transaction.id} />
+                    <button
+                    type="submit"
+                    className="--dark"
+                    >
+                    <DocumentDuplicateIcon width={20} />
+                    </button>
+                </fetcher.Form>
+                </>
             )}
-            <fetcher.Form method="post">
+            <fetcher.Form method="post"> 
                 <input type="hidden" name="_action" value="deleteTransaction" />
                 <input type="hidden" name="transactionId" value={transaction.id} />
                 <button
-                    type="submit"
-                    className="btn btn--warning"
-                    aria-label={`Delete ${transaction.name} expense`}
+                type="submit"
+                className="--warning"
                 >
                 <TrashIcon width={20} />
                 </button>
@@ -119,4 +120,4 @@ const TransactionItem = ({transaction, showBudget = true}) => {
     );
 };
 
-export default TransactionItem; 
+export default TransactionItem;
