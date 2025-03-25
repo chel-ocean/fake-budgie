@@ -60,14 +60,14 @@ const TransactionItem = ({transaction, showBudget = true}) => {
             {isEditing ? (
                 <>
                 <fetcher.Form 
-                    method="post">
+                    method="post" className="w-5">
                     <input type="hidden" name="_action" value="editTransaction" />
                     <input type="hidden" name="transactionId" value={transaction.id} />
                     <input type="hidden" name="newName" value={editedName} />
                     <input type="hidden" name="newAmount" value={editedAmount} />
                     <button
                         type="submit"
-                        className="btn btn--dark"
+                        className="btn btn--accent"
                         disabled={fetcher.state === "submitting"}
                     >
                     <CheckIcon width={20} />
