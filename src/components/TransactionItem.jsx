@@ -67,14 +67,14 @@ const TransactionItem = ({transaction, showBudget = true}) => {
                     <input type="hidden" name="newAmount" value={editedAmount} />
                     <button
                         type="submit"
-                        className="--dark"
+                        className="btn btn--dark"
                         disabled={fetcher.state === "submitting"}
                     >
                     <CheckIcon width={20} />
                     </button>
                 </fetcher.Form>
                 <button
-                    className="--warning"
+                    className="btn btn--warning"
                     onClick={() => {
                         setIsEditing(false);
                         setEditedName(transaction.name);
@@ -88,7 +88,7 @@ const TransactionItem = ({transaction, showBudget = true}) => {
                 <>
                 <button
                     onClick={() => setIsEditing(true)}
-                    className="--dark"
+                    className="btn btn--dark"
                 >
                 <PencilIcon width={20} />
                 </button>
@@ -97,7 +97,7 @@ const TransactionItem = ({transaction, showBudget = true}) => {
                     <input type="hidden" name="transactionId" value={transaction.id} />
                     <button
                     type="submit"
-                    className="--dark"
+                    className="btn btn--dark"
                     >
                     <DocumentDuplicateIcon width={20} />
                     </button>
@@ -109,7 +109,7 @@ const TransactionItem = ({transaction, showBudget = true}) => {
                 <input type="hidden" name="transactionId" value={transaction.id} />
                 <button
                 type="submit"
-                className="--warning"
+                className="btn btn--warning"
                 >
                 <TrashIcon width={20} />
                 </button>
