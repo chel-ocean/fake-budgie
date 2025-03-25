@@ -115,7 +115,6 @@ const Dashboard = () => {
                                     <AddBudgetForm />
                                 </div>
                             )
-                            
                         }
                     </div>
                 </div>

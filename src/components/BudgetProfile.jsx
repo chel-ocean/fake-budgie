@@ -30,15 +30,14 @@ const BudgetProfile = ({budget, showDelete = false}) => {
                                 if (!confirm("Are you sure you want to delete this Budget Profile?")) {
                                     e.preventDefault();
                                 }
-                            }}
-                        >
-                            <button type="submit" className="btn">
+                            }}>
+                            <button type="submit" className="btn btn--warning">
                                 <span>Delete Budget</span>
                                 <TrashIcon width={20} />
                             </button>
                         </Form>
+                        
                     </div>
-                   
                 ) : (
                     <div className="flex-sm">
                         <Link to={`/budget/${id}`} className="btn"> 
@@ -46,11 +45,9 @@ const BudgetProfile = ({budget, showDelete = false}) => {
                             <BanknotesIcon width={20} />
                         </Link>
                     </div>
-                    
                 )
             }
         </div>
-
     )
 }
 
