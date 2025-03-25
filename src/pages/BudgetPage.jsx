@@ -28,7 +28,7 @@ export async function budgetAction({request}) {
     const data = await request.formData()
     const {_action, ...values} = Object.fromEntries(data);
 
-    try {
+    try { // got rid of if... try... and made it try..l and then a bunch of if due to error handling
         // delete transaction
         if (_action === "deleteTransaction") {
             deleteItem({
