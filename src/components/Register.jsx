@@ -21,7 +21,6 @@ const Register = () => {
                         placeholder="Enter name" 
                         aria-label="Your Name" 
                         autoComplete="given-name" 
-                        className="btn btn--dark"
                         required
                     />
                     <label>Enter Email</label>
@@ -31,7 +30,6 @@ const Register = () => {
                         placeholder="Enter email" 
                         aria-label="Your Email" 
                         autoComplete="email" 
-                        className="btn btn--dark"
                         required
                     />
                     <label>Enter Password</label>
@@ -41,7 +39,6 @@ const Register = () => {
                         placeholder="Enter password" 
                         aria-label="Your Password" 
                         autoComplete="chosen-password" 
-                        className="btn btn--dark"
                         required
                     />
                     <input 
