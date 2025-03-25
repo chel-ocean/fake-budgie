@@ -5,7 +5,7 @@ import Error from './pages/Error';
 import Main, { mainLoader } from './layouts/Main';
 import TransactionsPage, {transactionsAction, transactionsLoader} from './pages/TransactionsPage';
 import BudgetPage, { budgetAction, budgetLoader } from './pages/BudgetPage';
-import { deleteBudget } from './actions/deleteBudget';
+import { deleteBudget, editBudgetAmount } from './actions/budgetActions';
 
 // library imports
 import { ToastContainer } from 'react-toastify';
@@ -41,11 +41,15 @@ function App() {
           element: <BudgetPage />,
           loader: budgetLoader,
           errorElement: <Error />,
-          action:budgetAction,
+          action: budgetAction,
           children: [
             {
               path: "delete",
               action: deleteBudget
+            },
+            {
+              path: "edit",
+              action: editBudgetAmount
             }
           ]
         },
@@ -63,7 +67,6 @@ function App() {
       path: "about",
       element: <h1>About</h1>,
     },
-    
     {
       path: "*",
       element: <Error />,

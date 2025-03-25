@@ -1,6 +1,6 @@
 import { Form, Link } from "react-router-dom";
 import {calculateSpentByBudget, formatCurrency, formatPercentage} from "../helpers";
-import { BanknotesIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { BanknotesIcon, TrashIcon, PencilIcon } from "@heroicons/react/20/solid";
 
 const BudgetProfile = ({budget, showDelete = false}) => {
     const {id, name, amount, color} = budget;
@@ -35,7 +35,30 @@ const BudgetProfile = ({budget, showDelete = false}) => {
             </div>
             {
                 showDelete ? (
-                    <div className="flx-sm">
+                    <div className="flex-sm">
+                        <Form
+                            method="post"
+                            action="edit"
+                            className="flex-sm"
+                        >
+                            <input
+                                type="number"
+                                name="newAmount"
+                                placeholder="New amount"
+                                step="0.01"
+                                min="0.01"
+                                required
+                                className="edit-input"
+                            />
+                            <button 
+                                type="submit" 
+                                className="btn btn--dark"
+                            >
+                                <span>Update Amount</span>
+                                <PencilIcon width={20} />
+                            </button>
+                        </Form>
+                        
                         <Form
                             method="post"
                             action="delete"
@@ -49,7 +72,6 @@ const BudgetProfile = ({budget, showDelete = false}) => {
                                 <TrashIcon width={20} />
                             </button>
                         </Form>
-                        
                     </div>
                 ) : (
                     <div className="flex-sm">
