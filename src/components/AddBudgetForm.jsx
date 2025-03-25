@@ -41,6 +41,7 @@ const AddBudgetForm = () => {
                         id="newBudgetAmount"
                         placeholder="Enter budget amount"
                         inputMode="decimal"
+                        min = "0.01"
                         required
                     />
                 </div>
@@ -49,6 +50,7 @@ const AddBudgetForm = () => {
                     type="submit" 
                     className="btn btn--dark"
                     disabled={isSubmitting}
+
                 >
                     { isSubmitting ? 
                         <span>Creating...</span> 

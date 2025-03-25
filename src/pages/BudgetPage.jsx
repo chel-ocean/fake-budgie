@@ -56,12 +56,11 @@ export async function budgetAction({request}) {
         }
 }
 
-
 const BudgetPage = () => {
     const {budget, transactions} = useLoaderData();
     return (
         <div className="grid-lg" style={{"--accent": budget.color}}>
-            <h1><span>{budget.name}</span> Overview</h1>
+            <h1><span className="accent">{budget.name}</span> Overview</h1>
             <div className="flex-lg">
                 <BudgetProfile budget={budget} showDelete={true} />
                 <AddTransactionForm budgets={[budget]} />
@@ -69,7 +68,7 @@ const BudgetPage = () => {
             {
                 transactions && transactions.length > 0 && (
                     <div className="grid-md">
-                        <h2><span className="accent">{budget.name}</span>Transactions</h2>
+                        <h2><span className="accent">{budget.name} </span>Transactions</h2>
                         <Table transactions={transactions} showBudget={false}/>
                     </div>
             )}
