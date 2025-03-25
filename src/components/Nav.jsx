@@ -6,10 +6,10 @@ import {TrashIcon, HomeIcon} from '@heroicons/react/20/solid'
 const Nav = ({userName}) => {
     return (
         <nav>
-            <div className="flex items-center justify-between p-4">
-                <NavLink to="/" aria-label="Go to Home" className="flex items-center gap-2">
+            {/* <div className="flex items-center justify-evenly p-4"> */}
+                <NavLink to="/" aria-label="Go to Home">
                     <HomeIcon width={25} />
-                    <span>Budgie</span>
+                    <span className="text-4xl">Budgie</span>
                 </NavLink>
                 {
                     userName && (
@@ -18,14 +18,14 @@ const Nav = ({userName}) => {
                                 event.preventDefault() // prevents refresh on submit
                             }
                         }}>
-                            <button type="submit" className="btn btn--warning flex items-center gap-2">
+                            <button type="submit" className="btn btn--warning">
                                 <span>Delete User</span>
                                 <TrashIcon width={25} />
                             </button>
                         </Form>
                     )
                 }
-            </div>
+            {/* </div> */}
         </nav>
     )
 }
