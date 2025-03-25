@@ -1,4 +1,4 @@
-export const wait = () => new Promise(resolve => setTimeout(resolve, Math.random() * 3000));
+export const wait = () => new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
 
 
 // colours

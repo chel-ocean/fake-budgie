@@ -72,7 +72,7 @@ const AddTransactionForm = ({budgets}) => {
                             <span>Add Transaction</span>
                             <PlusCircleIcon width={20} />
                         </>
-                    )
+                        )
                     }
                 </button>
             </fetcher.Form>
