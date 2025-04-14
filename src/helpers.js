@@ -1,6 +1,3 @@
-export const wait = () => new Promise(resolve => setTimeout(resolve, Math.random() * 1000));
-
-
 // colours
 const generateRandomColour = () => {
     const existingBudgetLength = fetchData("budgets")?. length ?? 0;
@@ -27,7 +24,7 @@ export const createBudget = ({name, amount}) => {
 }
 
 // transaction
-export const createTransaction = ({budgetId, name, amount}) => {
+export const createTransaction = ({budgetId, name, amount, }) => {
     const newTransaction = {
         id: crypto.randomUUID(),
         name: name,
