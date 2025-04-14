@@ -4,6 +4,10 @@ import BudgetProfile from "../components/BudgetProfile"
 import AddTransactionForm from "../components/AddTransactionForm"
 import Table from "../components/Table"
 import { toast } from "react-toastify"
+import { Chart } from 'chart.js/auto';
+import {Bar, Doughnut, Line} from 'react-chartjs-2';
+// import React, { Component } from "react";
+import AddChart from "../components/AddChart"
 
 export async function budgetLoader({params}) {
     const budget = await getAllMatchingItems({
@@ -107,16 +111,21 @@ const BudgetPage = () => {
                 <AddTransactionForm budgets={[budget]} />
             </div>
 
-        {transactions?.length > 0 ? (
+            {transactions?.length > 0 ? (
             <div className="grid-md">
                 <h2>
                     <span className="accent">{budget.name}</span> Transactions
                 </h2>
                 <Table transactions={transactions} showBudget={false} />
             </div>
-        ) : (
-            <p>No transactions yet</p>
+            ) : (
+                <p>No transactions yet</p>
             )}
+
+            <div>
+                <AddChart />
+            </div>
+            
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useLoaderData, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // helper functions
-import { createBudget, fetchData, wait, createTransaction, deleteItem } from "../helpers";
+import { createBudget, fetchData, createTransaction, deleteItem } from "../helpers";
 
 // components
 import Register from "../components/Register";
@@ -22,7 +22,6 @@ export function dashboardLoader() {
 
 // action
 export async function dashboardAction({request}) {
-    await wait();
     const data = await request.formData();
     const {_action, ...values} = Object.fromEntries(data);
     

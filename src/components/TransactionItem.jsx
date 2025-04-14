@@ -64,11 +64,19 @@ const TransactionItem = ({transaction, showBudget = true}) => {
                     <input type="hidden" name="_action" value="editTransaction" />
                     <input type="hidden" name="transactionId" value={transaction.id} />
                     <input type="hidden" name="newName" value={editedName} />
-                    <input type="hidden" name="newAmount" value={editedAmount} />
+                    <input type="hidden" name="newAmount" value={editedAmount}
+                    // type="number"
+                    step="0.01"
+                    inputMode="decimal"/>
                     <button
                         type="submit"
                         className="btn btn--accent"
                         disabled={fetcher.state === "submitting"}
+                        onClick={() => {
+                            setEditedName(transaction.editedName);
+                            setEditedAmount(transaction.editedAmount);
+                            // setIsEditing(false);
+                        }}
                     >
                     <CheckIcon width={20} />
                     </button>
