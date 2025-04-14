@@ -598,6 +598,12 @@ table a {
   border-radius: var(--round-full);
 }
 
+.action-buttons-tight {
+  display: flex;
+  gap: var(--space-xs); /* 8px gap */
+  align-items: center;
+}
+
 /* toast */
 .Toastify__toast-body {
   font-size: var(--fs-300);
@@ -607,7 +613,56 @@ table a {
   padding: 0.25rem;
   border: 1px solid hsl(var(--muted));
   border-radius: var(--round-sm);
-  width: 100%;
+  width: 50%;
   background: hsl(var(--bkg));
   color: hsl(var(--text));
+}
+
+/* Fix column widths to keep headers in the same position */
+th:nth-child(1) { /* Name column */
+  width: 80px;
+}
+
+th:nth-child(2) { /* Amount column */
+  width: 100px;
+}
+
+th:nth-child(3) { /* Date column */
+  width: 100px;
+}
+
+td:nth-child(1) { /* Name column */
+  width: 80px;
+}
+
+td:nth-child(2) { /* Amount column */
+  width: 100px;
+}
+
+td:nth-child(3) { /* Date column */
+  width: 100px;
+}
+
+/* Fix column widths to keep headers in the same position */
+th:nth-child(1) { /* Name column */
+  width: 500px;
+}
+
+th:nth-child(2) { /* Amount column */
+  width: 500px;
+}
+
+th:nth-child(3) { /* Date column */
+  width: 500px;
+}
+
+
+/* Adjust input boxes to fit within the fixed column widths */
+.edit-input--text,
+.edit-input--number {
+  width: 100%; /* Take up the full width of the fixed column */
+  max-width: 100%; /* Prevent overflow beyond the column width */
+  display: inline-block; /* Allow centering within the table cell */
+  text-align: center; /* Center the text inside the input */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
 }

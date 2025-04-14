@@ -61,7 +61,7 @@ const Table = ({transactions, showBudget = true}) => {
         <table className="table-auto w-full text-left">
             <thead>
                 <tr>
-                    {["Name", "Amount", "Date", showBudget? "Budget Profile" : "", ""].map((i, index) => (<th key={index}>{i}</th>))}
+                    {["Name", "Amount", "Date", showBudget? "Budgeting" : "", ""].map((i, index) => (<th key={index}>{i}</th>))}
                 </tr>
             </thead>
             <tbody>
