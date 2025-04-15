@@ -75,6 +75,52 @@ export async function dashboardAction({request}) {
             throw new Error("There was a problem with your transaction deletion. Please try again.");
         }
     }
+
+
+    // CHANGES
+    // allow editing transaction in the main home page
+    if (_action === "editTransaction") {
+        try {
+            const transactions = fetchData("transactions") || [];
+            const updatedTransactions = transactions.map((t) =>
+                t.id === values.transactionId
+                    ? {
+                          ...t,
+                          name: values.newName,
+                          amount: Number(values.newAmount),
+                      }
+                    : t
+            );
+            localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
+            toast.success("Transaction updated!");
+            return null;
+        } catch (e) {
+            throw new Error("There was a problem updating your transaction.");
+        }
+    }
+
+    // allow duplicating transaction in the main home page
+    if (_action === "duplicateTransaction") {
+        try {
+            const transactions = fetchData("transactions") || [];
+            const original = transactions.find((t) => t.id === values.transactionId);
+            if (!original) {
+                throw new Error("Transaction not found");
+            }
+            const newTransaction = {
+                ...original,
+                id: crypto.randomUUID(),
+                name: `${original.name} (Copy)`,
+                createdAt: Date.now(),
+            };
+            localStorage.setItem("transactions", JSON.stringify([...transactions, newTransaction]));
+            toast.success("Transaction duplicated!");
+            return null;
+        } catch (e) {
+            throw new Error("There was a problem duplicating your transaction.");
+        }
+    }
+    return null;
 }
 
 const Dashboard = () => {

@@ -600,7 +600,7 @@ table a {
 
 .action-buttons-tight {
   display: flex;
-  gap: var(--space-xs); /* 8px gap */
+  gap: var(--space-xs);
   align-items: center;
 }
 
@@ -617,7 +617,6 @@ table a {
   background: hsl(var(--bkg));
   color: hsl(var(--text));
 }
-
 
 /* Fix column widths to keep headers in the same position */
 th:nth-child(1) { /* Name column */

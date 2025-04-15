@@ -14,8 +14,7 @@ const TransactionItem = ({ transaction, showBudget = true }) => {
         value: transaction.budgetId
     })[0];
 
-
-    // CHANGE
+    // OLD CHANGES
     // save action is in progress
     const [isSaving, setIsSaving] = useState(false);
     const handleSave = () => {
@@ -74,9 +73,13 @@ const TransactionItem = ({ transaction, showBudget = true }) => {
             <td>
                 <div className="flex-sm">
                     {isEditing ? (
-                        // CHANGES: Wrapped Save, Delete, and Delete buttons together in a div so there's no uneven spacing
+                        // CHANGES: Save, Delete, and Delete buttons are together in a div so there's no uneven spacing
                         <div className="action-buttons-tight">
-                            <fetcher.Form method="post" onSubmit={handleSave}>
+                            <fetcher.Form
+                                method="post"
+                                action={`/budget/${budget.id}`} //NEW CHANGE
+                                onSubmit={handleSave}
+                            >
                                 <input type="hidden" name="_action" value="editTransaction" />
                                 <input type="hidden" name="transactionId" value={transaction.id} />
                                 <input type="hidden" name="newName" value={editedName} />
@@ -99,7 +102,10 @@ const TransactionItem = ({ transaction, showBudget = true }) => {
                             >
                                 <XMarkIcon width={20} />
                             </button>
-                            <fetcher.Form method="post">
+                            <fetcher.Form
+                                method="post"
+                                action={`/budget/${budget.id}`} // NEW CHANGES
+                            >
                                 <input type="hidden" name="_action" value="deleteTransaction" />
                                 <input type="hidden" name="transactionId" value={transaction.id} />
                                 <button
@@ -111,7 +117,7 @@ const TransactionItem = ({ transaction, showBudget = true }) => {
                             </fetcher.Form>
                         </div>
                     ) : (
-                        // CHANGES: Wrapped Edit, Duplicate, and Delete buttons together in a div so there's no uneven spacing
+                        // CHANGES: Edit, Duplicate, and Delete buttons are together in a div so there's no uneven spacing
                         <div className="action-buttons-tight">
                             <button
                                 onClick={() => setIsEditing(true)}
@@ -119,7 +125,10 @@ const TransactionItem = ({ transaction, showBudget = true }) => {
                             >
                                 <PencilIcon width={20} />
                             </button>
-                            <fetcher.Form method="post">
+                            <fetcher.Form
+                                method="post"
+                                action={`/budget/${budget.id}`} // NEW CHANGES
+                            >
                                 <input type="hidden" name="_action" value="duplicateTransaction" />
                                 <input type="hidden" name="transactionId" value={transaction.id} />
                                 <button
@@ -129,7 +138,10 @@ const TransactionItem = ({ transaction, showBudget = true }) => {
                                     <DocumentDuplicateIcon width={20} />
                                 </button>
                             </fetcher.Form>
-                            <fetcher.Form method="post">
+                            <fetcher.Form
+                                method="post"
+                                action={`/budget/${budget.id}`} // NEW CHANGES
+                            >
                                 <input type="hidden" name="_action" value="deleteTransaction" />
                                 <input type="hidden" name="transactionId" value={transaction.id} />
                                 <button
